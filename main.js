@@ -61,6 +61,7 @@ function paintAmount() {
   $('down').disabled = busy || amount <= -AddOnLogic.RANGE;
   $('up').disabled = busy || amount >= AddOnLogic.RANGE;
   $('apply').disabled = busy || !session;
+  $('apply').textContent = amount === applied ? 'Apply' : `Apply ${AddOnLogic.label(amount)}`;
   $('reset').disabled = busy || !session || applied === 0;
 }
 function message(text, warn = false) {
@@ -69,6 +70,18 @@ function message(text, warn = false) {
 }
 // type an amount: click the number, type (e.g. -5), Return
 $('amount').addEventListener('focus', (e) => e.target.select());
+// take a typed amount as it's typed: in LUNA's web view, clicking Apply doesn't take the focus
+// off this box, so waiting for blur would apply the old amount
+$('amount').addEventListener('input', (e) => {
+  const n = AddOnLogic.parseAmount(e.target.value);
+  if (n !== null) { amount = n; message(''); paintAmount(); }
+});
+/** The amount to apply: whatever is typed in the box right now, if it's valid. */
+function typedAmount() {
+  const n = AddOnLogic.parseAmount($('amount').value);
+  if (n !== null) amount = n;
+  return amount;
+}
 $('amount').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); e.target.blur(); }
   if (e.key === 'Escape') { e.target.value = AddOnLogic.label(amount); e.target.blur(); }
@@ -81,7 +94,7 @@ $('amount').addEventListener('blur', (e) => {
 });
 $('down').onclick = () => { amount = AddOnLogic.clamp(amount - 1); paintAmount(); };
 $('up').onclick = () => { amount = AddOnLogic.clamp(amount + 1); paintAmount(); };
-$('apply').onclick = () => run(amount);
+$('apply').onclick = () => run(typedAmount());
 $('reset').onclick = () => { amount = 0; paintAmount(); run(0); };
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' && e.target.type !== 'checkbox') return;
