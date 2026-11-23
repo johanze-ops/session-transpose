@@ -1,5 +1,7 @@
 # Session Transpose for LUNA
 
+![Session Transpose](images/banner.png)
+
 Transpose a whole LUNA session up or down by up to an octave: every MIDI clip and every audio
 clip moves, in one undo step, and the tracks you don't want touched (drums, FX, risers...)
 are skipped.
