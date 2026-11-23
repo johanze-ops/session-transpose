@@ -1,0 +1,15 @@
+{
+    "package_name": "Session Transpose",
+    "id": "com.ranrun.session_transpose",
+    "title": "Session Transpose",
+    "version": "0.1.0",
+    "manufacturer": "JOHANZE",
+    "description": "Transpose every MIDI and audio clip in the session by up to an octave in one undo step, skipping tracks whose names match your exclude tags (drums, FX...).",
+    "categories": ["Editing"],
+    "icon": "images/icon.png",
+    "sdk_version": "3.1.2",
+    "min_luna_version": "3.1.2",
+    "engines": ["luna"],
+    "html": "index.html",
+    "target": "browser"
+}
