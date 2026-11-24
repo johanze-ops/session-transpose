@@ -2,7 +2,7 @@
     "package_name": "Session Transpose",
     "id": "com.ranrun.session_transpose",
     "title": "Session Transpose",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "manufacturer": "JOHANZE",
     "description": "Transpose every MIDI and audio clip in the session by up to an octave in one undo step, skipping tracks whose names match your exclude tags (drums, FX...).",
     "categories": ["Editing"],
